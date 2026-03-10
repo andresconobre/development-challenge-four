@@ -29,7 +29,7 @@ export function PageHeader() {
       />
 
       <Stack
-        direction={{ xs: 'column', md: 'row' }}
+        direction={{ xs: 'column-reverse', md: 'row' }}
         justifyContent="space-between"
         alignItems={{ xs: 'flex-start', md: 'center' }}
         spacing={2}
@@ -63,6 +63,7 @@ export function PageHeader() {
           startIcon={<AddIcon />}
           onClick={() => navigate('/patients/new')}
           sx={{
+            alignSelf: { xs: 'stretch', sm: 'flex-start', md: 'auto' },
             bgcolor: 'common.white',
             color: 'primary.dark',
             '&:hover': {
