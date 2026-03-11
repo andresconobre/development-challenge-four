@@ -164,6 +164,24 @@ export function PatientsListPage() {
               labelDisplayedRows={({ from, to, count }) =>
                 `${from}-${to} de ${count !== -1 ? count : `mais de ${to}`}`
               }
+              sx={{
+                '.MuiTablePagination-toolbar': {
+                  flexWrap: { xs: 'wrap', sm: 'nowrap' },
+                  justifyContent: { xs: 'center', sm: 'flex-end' },
+                  rowGap: 1,
+                  columnGap: 2,
+                  py: { xs: 1.5, sm: 0 },
+                },
+                '.MuiTablePagination-spacer': {
+                  display: { xs: 'none', sm: 'block' },
+                },
+                '.MuiTablePagination-selectLabel, .MuiTablePagination-displayedRows': {
+                  margin: 0,
+                },
+                '.MuiTablePagination-actions': {
+                  marginLeft: { xs: 0, sm: 2.5 },
+                },
+              }}
             />
           </Paper>
         </>
