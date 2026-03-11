@@ -100,12 +100,14 @@ export function PatientsListPage() {
           value={search}
           onChange={(event) => setSearch(event.target.value)}
           placeholder="Digite o nome do paciente"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchRoundedIcon color="action" />
-              </InputAdornment>
-            ),
+          slotProps={{
+            input: {
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchRoundedIcon color="action" />
+                </InputAdornment>
+              ),
+            },
           }}
         />
       </Paper>
