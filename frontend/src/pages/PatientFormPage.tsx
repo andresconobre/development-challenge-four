@@ -525,6 +525,7 @@ export function PatientFormPage() {
                   <Button
                     variant="outlined"
                     onClick={() => navigate('/')}
+                    disabled={formik.isSubmitting}
                     sx={{
                       borderColor: 'rgba(204, 75, 75, 0.24)',
                       color: '#b04444',
