@@ -1,7 +1,8 @@
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useRef } from 'react'
 import type { FeedbackItem } from '../components/FeedbackStack'
-import { FeedbackProvider, useFeedback } from '../contexts/feedback-context'
+import { FeedbackProvider } from '../contexts/feedback-context'
+import { useFeedback } from '../contexts/use-feedback'
 
 function AppLayoutContent() {
   const location = useLocation()

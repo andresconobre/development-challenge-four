@@ -17,7 +17,7 @@ import {
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded'
 import InputAdornment from '@mui/material/InputAdornment'
 import { useEffect, useState } from 'react'
-import { useFeedback } from '../contexts/feedback-context'
+import { useFeedback } from '../contexts/use-feedback'
 import { PageHeader } from '../components/PageHeader'
 import { PatientsTable } from '../components/PatientsTable'
 import { patientsService } from '../services/patientsService'
