@@ -53,7 +53,7 @@ const validationSchema = yup.object({
   birthDate: yup
     .string()
     .required('Data de nascimento obrigatória')
-    .matches(/^\d{4}-\d{2}-\d{2}$/, 'Use o formato YYYY-MM-DD')
+    .matches(/^\d{4}-\d{2}-\d{2}$/, 'Use o formato DD/MM/YYYY')
     .test('valid-date', 'Data de nascimento inválida', (value) => {
       if (!value) return false
       const parsedDate = new Date(`${value}T00:00:00.000Z`)
