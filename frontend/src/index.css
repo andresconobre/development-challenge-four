@@ -1,9 +1,7 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background:
-    radial-gradient(circle at top left, rgba(114, 227, 222, 0.28), transparent 30%),
-    linear-gradient(180deg, #f4fbfd 0%, #edf8fb 45%, #e7f3f8 100%);
+  background-color: #edf8fb;
   color: #143042;
 }
 
@@ -20,7 +18,4 @@ body::before {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background:
-    linear-gradient(135deg, rgba(0, 179, 173, 0.06), transparent 35%),
-    radial-gradient(circle at right top, rgba(20, 118, 209, 0.08), transparent 25%);
 }
