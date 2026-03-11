@@ -17,7 +17,7 @@ import {
   Typography,
 } from '@mui/material'
 import { useFormik } from 'formik'
-import { useEffect, useMemo, useState, type ChangeEvent } from 'react'
+import { useEffect, useMemo, useState, type ChangeEvent, type KeyboardEvent } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import * as yup from 'yup'
 import { useFeedback } from '../contexts/feedback-context'
@@ -251,16 +251,10 @@ export function PatientFormPage() {
     void loadPatient()
   }, [formik.setValues, isEditMode, patientFromNavigation, patientId])
 
-  async function handleCepBlur() {
-    formik.handleBlur({
-      target: {
-        name: 'address.cep',
-      },
-    } as React.FocusEvent<HTMLInputElement>)
-
+  async function fetchAddressByCep() {
     const normalizedCep = formik.values.address.cep.replace(/\D/g, '')
 
-    if (normalizedCep.length !== 8) {
+    if (normalizedCep.length !== 8 || isFetchingCep) {
       return
     }
 
@@ -280,6 +274,25 @@ export function PatientFormPage() {
     } finally {
       setIsFetchingCep(false)
     }
+  }
+
+  async function handleCepBlur() {
+    formik.handleBlur({
+      target: {
+        name: 'address.cep',
+      },
+    } as React.FocusEvent<HTMLInputElement>)
+
+    await fetchAddressByCep()
+  }
+
+  async function handleCepKeyDown(event: KeyboardEvent<HTMLInputElement>) {
+    if (event.key !== 'Enter') {
+      return
+    }
+
+    event.preventDefault()
+    await fetchAddressByCep()
   }
 
   function handleCepChange(event: ChangeEvent<HTMLInputElement>) {
@@ -414,6 +427,7 @@ export function PatientFormPage() {
                       name="address.cep"
                       value={formik.values.address.cep}
                       onChange={handleCepChange}
+                      onKeyDown={handleCepKeyDown}
                       onBlur={handleCepBlur}
                       disabled={isFetchingCep}
                       placeholder="00000-000"
