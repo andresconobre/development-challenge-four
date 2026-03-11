@@ -28,6 +28,7 @@ export function PatientsListPage() {
   const { pushFeedback } = useFeedback()
   const [patients, setPatients] = useState<Patient[]>([])
   const [loading, setLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
   const [patientToDelete, setPatientToDelete] = useState<Patient | null>(null)
   const [search, setSearch] = useState('')
   const [debouncedSearch, setDebouncedSearch] = useState('')
@@ -53,9 +54,10 @@ export function PatientsListPage() {
   }
 
   async function confirmDelete() {
-    if (!patientToDelete) return
+    if (!patientToDelete || isLoading) return
 
     try {
+      setIsLoading(true)
       await patientsService.remove(patientToDelete.id)
       pushFeedback('Paciente removido com sucesso', 'success')
       setPatientToDelete(null)
@@ -63,6 +65,8 @@ export function PatientsListPage() {
     } catch (error) {
       console.error(error)
       pushFeedback(getErrorMessage(error, 'Erro ao remover paciente'), 'error')
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -165,7 +169,16 @@ export function PatientsListPage() {
         </>
       )}
 
-      <Dialog open={Boolean(patientToDelete)} onClose={() => setPatientToDelete(null)} maxWidth="xs" fullWidth>
+      <Dialog
+        open={Boolean(patientToDelete)}
+        onClose={() => {
+          if (!isLoading) {
+            setPatientToDelete(null)
+          }
+        }}
+        maxWidth="xs"
+        fullWidth
+      >
         <DialogTitle>Excluir paciente</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -175,11 +188,11 @@ export function PatientsListPage() {
           </DialogContentText>
         </DialogContent>
         <DialogActions sx={{ px: 3, pb: 2 }}>
-          <Button onClick={() => setPatientToDelete(null)} color="inherit">
+          <Button onClick={() => setPatientToDelete(null)} color="inherit" disabled={isLoading}>
             Cancelar
           </Button>
-          <Button onClick={confirmDelete} color="error" variant="contained">
-            Excluir
+          <Button onClick={confirmDelete} color="error" variant="contained" disabled={isLoading}>
+            {isLoading ? 'Excluindo...' : 'Excluir'}
           </Button>
         </DialogActions>
       </Dialog>
