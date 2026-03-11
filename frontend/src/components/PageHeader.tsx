@@ -1,4 +1,4 @@
-import { Box, Button, Chip, Stack, Typography } from '@mui/material'
+import { Box, Button, Stack, Typography } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import { useNavigate } from 'react-router-dom'
 
@@ -12,50 +12,53 @@ export function PageHeader() {
         px: { xs: 3, md: 4 },
         py: { xs: 3, md: 4 },
         borderRadius: 2,
-        background:
-          'linear-gradient(135deg, rgba(0, 179, 173, 0.95), rgba(20, 118, 209, 0.92))',
-        color: 'common.white',
+        backgroundColor: 'common.white',
+        color: 'text.primary',
         position: 'relative',
         overflow: 'hidden',
+        border: '1px solid rgba(20, 48, 66, 0.08)',
+        boxShadow: '0 14px 34px rgba(13, 74, 109, 0.08)',
       }}
     >
       <Box
         sx={{
           position: 'absolute',
           inset: 0,
-          background:
-            'radial-gradient(circle at top right, rgba(255,255,255,0.22), transparent 28%)',
+          background: 'none',
         }}
       />
 
       <Stack
-        direction={{ xs: 'column-reverse', md: 'row' }}
-        justifyContent="space-between"
-        alignItems={{ xs: 'flex-start', md: 'center' }}
+        direction={{ xs: 'column', lg: 'row' }}
+        justifyContent={{ xs: 'center', lg: 'space-between' }}
+        alignItems="center"
         spacing={2}
         sx={{ position: 'relative' }}
       >
-        <Box maxWidth={680}>
-          <Chip
-            label="Medcloud Patient Registry"
+        <Stack
+          direction={{ xs: 'column', sm: 'row' }}
+          spacing={2}
+          alignItems="center"
+          justifyContent={{ xs: 'center', lg: 'flex-start' }}
+          sx={{ maxWidth: 680 }}
+        >
+          <Box
+            component="img"
+            src="https://cdn.prod.website-files.com/6760868f67abf4e09f96edc7/67b38f80a21f4479be0135b1_logo%20medcloud.svg"
+            alt="Medcloud"
             sx={{
-              mb: 2,
-              color: 'common.white',
-              bgcolor: 'rgba(255,255,255,0.18)',
-              borderRadius: 1,
-              fontWeight: 700,
+              height: { xs: 34, sm: 40 },
+              width: 'auto',
+              flexShrink: 0,
             }}
           />
 
-          <Typography variant="h4" component="h1" fontWeight={800} color="inherit" gutterBottom>
-            Pacientes cadastrados
-          </Typography>
-
-          <Typography color="rgba(255,255,255,0.88)">
-            Gestão de cadastros com uma interface limpa, objetiva e alinhada à identidade visual da
-            Medcloud.
-          </Typography>
-        </Box>
+          <Box textAlign={{ xs: 'center', lg: 'left' }}>
+            <Typography variant="h4" component="h2" fontWeight={800} color="inherit">
+              Cadastro de pacientes
+            </Typography>
+          </Box>
+        </Stack>
 
         <Button
           variant="contained"
@@ -63,11 +66,12 @@ export function PageHeader() {
           startIcon={<AddIcon />}
           onClick={() => navigate('/patients/new')}
           sx={{
-            alignSelf: { xs: 'stretch', sm: 'flex-start', md: 'auto' },
-            bgcolor: 'common.white',
-            color: 'primary.dark',
+            width: { xs: '100%', lg: 'auto' },
+            maxWidth: { xs: 360, lg: 'none' },
+            bgcolor: 'primary.main',
+            color: 'common.white',
             '&:hover': {
-              bgcolor: 'rgba(255,255,255,0.92)',
+              bgcolor: 'primary.dark',
             },
           }}
         >
